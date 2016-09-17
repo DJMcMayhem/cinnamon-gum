@@ -14,7 +14,6 @@ def bb96encode(code, a = 0, s = []):
   return bytes(s)
 
 def decompress(code):
-  mode = chr(code[0])
   code = code[1:]
   try:
     decompressed_code = zlib.decompress(code, -zlib.MAX_WBITS)
@@ -24,7 +23,7 @@ def decompress(code):
     except:
       decompressed_code = bb96encode(code)
 
-  return mode, "".join(map(chr, decompressed_code))
+  return "".join(map(chr, decompressed_code))
 
 def get_input(last_input):
   try:
@@ -142,7 +141,8 @@ if __name__ == "__main__":
       i = input()
       exec(string)
     else:
-      mode, code = decompress(string)
+      mode = string[0]
+      code = decompress(string)
       input_pieces = pcre.split(r"(?<![^\\]\\)!", code)
 
       if len(input_pieces) >= 2:
