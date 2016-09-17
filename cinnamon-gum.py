@@ -141,7 +141,7 @@ if __name__ == "__main__":
       i = input()
       exec(string)
     else:
-      mode = string[0]
+      mode = chr(string[0])
       code = decompress(string)
       input_pieces = pcre.split(r"(?<![^\\]\\)!", code)
 
