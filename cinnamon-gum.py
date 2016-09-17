@@ -1,5 +1,15 @@
 #!/usr/bin/python3
 
+"""Usage:
+  cinnamon-gum.py FILE
+  cinnamon-gum.py FILE [options]
+
+Options:
+  -h --help     Show this screen.
+  -u            Read uncompressed code
+"""
+
+from docopt import docopt
 import ast, exrex, hashlib, lzma, pcre, sys, zlib
 
 def bb96encode(code, a = 0, s = []):
@@ -134,6 +144,7 @@ def execute(mode, code, input_str):
     print(result.encode("utf-8").decode("unicode-escape"))
 
 if __name__ == "__main__":
+  args = docopt(__doc__)
   pcre.enable_re_template_mode()
   with open(sys.argv[1], 'rb') as file:
     string = file.read()
@@ -142,7 +153,7 @@ if __name__ == "__main__":
       exec(string)
     else:
       mode = chr(string[0])
-      code = decompress(string)
+      code = str(string) if args['-u'] else decompress(string)
       input_pieces = pcre.split(r"(?<![^\\]\\)!", code)
 
       if len(input_pieces) >= 2:
