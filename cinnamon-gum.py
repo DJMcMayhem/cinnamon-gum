@@ -24,7 +24,7 @@ def decompress(code):
     except:
       decompressed_code = bb96encode(code)
 
-  return mode, "".join(map(chr, decompressed_code)) 
+  return mode, "".join(map(chr, decompressed_code))
 
 def get_input(last_input):
   try:
@@ -67,7 +67,7 @@ def execute(mode, code, input_str):
   elif mode == "p":
     literal = ast.literal_eval(input_str)
     if isinstance(literal, int):
-      result = pcre.sub(r"(?<![^\\]\\)~(.+?)(?<![^\\]\\)~",r"\1" * literal, code, flags=pcre.DOTALL) 
+      result = pcre.sub(r"(?<![^\\]\\)~(.+?)(?<![^\\]\\)~",r"\1" * literal, code, flags=pcre.DOTALL)
     else:
       result = pcre.sub(r"(?<![^\\]\\)%(.+?)(?<![^\\]\\)%",r"\1" * literal[1], pcre.sub(r"~(.+?)~",r"\1" * literal[0], code, flags=pcre.DOTALL), flags=pcre.DOTALL)
   elif mode == "P":
@@ -98,7 +98,7 @@ def execute(mode, code, input_str):
   elif mode == "d":
     pieces = pcre.split(r"(?<![^\\]\\)`", code)
     subs = pcre.split(r"(?<![^\\]\\)&", pieces[0])
-    
+
     for sub in subs:
       input_str = pcre.sub(sub, "", input_str)
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     else:
       mode, code = decompress(string)
       input_pieces = pcre.split(r"(?<![^\\]\\)!", code)
-  
+
       if len(input_pieces) >= 2:
         i = get_input("!".join(input_pieces[1:]))
       else:

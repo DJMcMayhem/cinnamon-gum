@@ -17,7 +17,7 @@ for test in enumerate(tests):
     temp = tempfile.NamedTemporaryFile()
     temp.write(test[1][0])
     temp.flush()
-    result = subprocess.check_output("python3 cinnamon-gum.py %s <<< '%s'" % (temp.name, test[1][1]), shell=True, executable="/bin/bash") 
+    result = subprocess.check_output("python3 cinnamon-gum.py %s <<< '%s'" % (temp.name, test[1][1]), shell=True, executable="/bin/bash")
     if result == test[1][2]:
       pass
     else:

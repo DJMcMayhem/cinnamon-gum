@@ -1,4 +1,4 @@
-Cinnamon Gum is a text-processing golfing language. 
+Cinnamon Gum is a text-processing golfing language.
 
 One of the first things to note is that all CG programs are compressed. There are three supported compression schemes:
 
